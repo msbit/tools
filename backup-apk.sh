@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ADB=${ADB-adb}
+
 if [ ${#} -eq 0 ]
 then
   echo "Usage ${0} <destination-dir>"
@@ -22,15 +24,15 @@ mkdir -p ${DEST_DIR}
 
 cd ${TMP_DIR}
 
-adb shell pm list packages -f | sed -e 's/^package://g' -e 's/=/ /g' -e 's///g' | sort | while read PKG_FILE PKG_NAME
+${ADB} shell pm list packages -f | sed -e 's/^package://g' -e 's/=/ /g' -e 's///g' | sort | while read PKG_FILE PKG_NAME
 do
-  DEVICE_MD5="$(adb shell md5 ${PKG_FILE} | awk '{print $1}')"
+  DEVICE_MD5="$(${ADB} shell md5 ${PKG_FILE} | awk '{print $1}')"
   if grep -q "${DEVICE_MD5}:${PKG_NAME}" ${LOG_FILE}
   then
     echo "Skipping ${PKG_NAME}"
     continue
   fi
-  adb pull ${PKG_FILE} ${PKG_NAME}
+  ${ADB} pull ${PKG_FILE} ${PKG_NAME}
   if [[ ! -s "${PKG_NAME}" ]] 
   then
     echo "Error fetching ${PKG_NAME}"
