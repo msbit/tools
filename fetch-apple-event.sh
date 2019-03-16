@@ -50,7 +50,7 @@ do
 done
 echo
 
-ffmpeg -f concat -i "${CONCAT_FILE}" -c copy "${SOURCE_PATH}/${QUALITY}_vod.ts"
+ffmpeg -f concat -safe 0 -i "${CONCAT_FILE}" -c copy "${SOURCE_PATH}/${QUALITY}_vod.ts"
 
 rm -rf "${CHILD_DIR}"
 rm "${CHILD_FILE}"
