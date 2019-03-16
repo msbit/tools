@@ -2,6 +2,12 @@
 
 set -eu
 
+if [ ${#} -ne 2 ]
+then
+  echo "Usage ${0} <source-key-store> <source-alias>"
+  exit 1
+fi
+
 SRCKEYSTORE=${1}
 SRCALIAS=${2}
 
