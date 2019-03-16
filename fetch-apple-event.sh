@@ -25,10 +25,10 @@ SOURCE_PATH=$(pwd)
 MASTER_URL=${1}
 QUALITY=${2}
 
-MASTER_FILE=$(mktemp -t $$)
-CHILD_FILE=$(mktemp -t $$)
-CONCAT_FILE=$(mktemp -t $$)
-CHILD_DIR=$(mktemp -d -t $$)
+MASTER_FILE=$(mktemp -t $$.XXXXXXXXXX)
+CHILD_FILE=$(mktemp -t $$.XXXXXXXXXX)
+CONCAT_FILE=$(mktemp -t $$.XXXXXXXXXX)
+CHILD_DIR=$(mktemp -d -t $$.XXXXXXXXXX)
 
 curl -s -o "${MASTER_FILE}" "${MASTER_URL}"
 
