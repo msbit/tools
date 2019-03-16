@@ -33,7 +33,7 @@ CHILD_DIR=$(mktemp -d -t $$.XXXXXXXXXX)
 curl -s -o "${MASTER_FILE}" "${MASTER_URL}"
 
 CHILD_URL=$(grep "${QUALITY}_vod.m3u8" "${MASTER_FILE}")
-VOD_PART_BASE=$(echo "${CHILD_URL}" | sed -e "s/${QUALITY}_vod.m3u8$//g")
+VOD_PART_BASE="${CHILD_URL%%${QUALITY}_vod.m3u8}"
 
 curl -s -o "${CHILD_FILE}" "${CHILD_URL}"
 
