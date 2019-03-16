@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 SRCKEYSTORE=${1}
 SRCALIAS=${2}
 

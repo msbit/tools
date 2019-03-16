@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 if [ ${#} != 4 ]
 then
   echo "Usage: ${0} <ca-root-dir> <ca-cn> <server-cn> <client-cn>"

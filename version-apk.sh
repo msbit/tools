@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 if [ ${#} -eq 0 ] 
 then
   echo "Usage ${0} <apk-file> [<apk-file> ...]"

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 if [ ! ${#} -eq 2 ]
 then
   echo "Usage ${0} <url> <quality>"

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 ADB=${ADB-adb}
 
 if [ ${#} -eq 0 ]

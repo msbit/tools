@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 WORKING_DIR=$(mktemp -d -t scratch)
 
 pushd ${WORKING_DIR}
