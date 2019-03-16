@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SRCKEYSTORE=${1}
 SRCALIAS=${2}

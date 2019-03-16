@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 WORKING_DIR=$(mktemp -d -t scratch)
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 drush ard
 drush up drupal
