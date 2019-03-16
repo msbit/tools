@@ -44,7 +44,7 @@ pushd "${CHILD_DIR}"
 grep "^${QUALITY}_vod_.*ts$" "${CHILD_FILE}" | while read -r VOD_PART_FILE
 do
   echo "file '${CHILD_DIR}/${VOD_PART_FILE}'" >> "${CONCAT_FILE}"
-  curl ${CURL_OPTS} -O --retry 4 "${VOD_PART_BASE}${VOD_PART_FILE}"
+  curl ${CURL_OPTS} -O "${VOD_PART_BASE}${VOD_PART_FILE}"
   echo -n '.'
 done
 echo
