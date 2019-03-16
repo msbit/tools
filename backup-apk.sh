@@ -16,7 +16,7 @@ then
   exit 1
 fi
 
-TMP_DIR=$(mktemp -d -t backup-apk)
+TMP_DIR=$(mktemp -d -t backup-apk.XXXXXXXXXX)
 if [[ "${1}" = /* || "${1}" = ~* ]]
 then
   DEST_DIR=${1}

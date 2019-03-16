@@ -20,7 +20,7 @@ while [ ${#} -gt 0 ]
 do
   APK_FILE=${1}
 
-  WORKING_DIR=$(mktemp -d -t "${SCRIPT_NAME}")
+  WORKING_DIR=$(mktemp -d -t "${SCRIPT_NAME}.XXXXXXXXXX")
 
   apktool d -f "${APK_FILE}" "${WORKING_DIR}" > /dev/null 2>&1
 
