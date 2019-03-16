@@ -14,13 +14,11 @@ then
   exit 1
 fi
 
-SCRIPT_NAME=${0}
-
 while [ ${#} -gt 0 ]
 do
   APK_FILE=${1}
 
-  WORKING_DIR=$(mktemp -d -t "${SCRIPT_NAME}.XXXXXXXXXX")
+  WORKING_DIR=$(mktemp -d -t $$.XXXXXXXXXX)
 
   apktool d -f "${APK_FILE}" "${WORKING_DIR}" > /dev/null 2>&1
 
