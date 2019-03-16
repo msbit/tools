@@ -14,18 +14,16 @@ then
   exit 1
 fi
 
-SCRIPT_NAME=${0}
-
 while [ ${#} -gt 0 ]
 do
   APK_FILE=${1}
 
-  WORKING_DIR=$(mktemp -d -t "${SCRIPT_NAME}.XXXXXXXXXX")
+  WORKING_DIR=$(mktemp -d -t $$.XXXXXXXXXX)
 
-  apktool d -f "${APK_FILE}" "${WORKING_DIR}" > /dev/null 2>&1
+  apktool d --force --no-src --output "${WORKING_DIR}" --quiet "${APK_FILE}"
 
-  VERSION_CODE=$(grep android:versionCode= "${WORKING_DIR}/AndroidManifest.xml" | sed -e 's/^.*android:versionCode="\([^"]*\)".*$/\1/g')
-  VERSION_NAME=$(grep android:versionName= "${WORKING_DIR}/AndroidManifest.xml" | sed -e 's/^.*android:versionName="\([^"]*\)".*$/\1/g')
+  VERSION_CODE=$(grep versionCode: "${WORKING_DIR}/apktool.yml" | sed -e "s/^.*versionCode: '\([^']*\)'.*$/\1/g")
+  VERSION_NAME=$(grep versionName: "${WORKING_DIR}/apktool.yml" | sed -e 's/^.*versionName: \(.*\)$/\1/g')
   PACKAGE=$(grep package= "${WORKING_DIR}/AndroidManifest.xml" | sed -e 's/^.*package="\([^"]*\)".*$/\1/g')
 
   echo "${PACKAGE}" "${VERSION_CODE}" "${VERSION_NAME}"
