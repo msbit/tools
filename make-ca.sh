@@ -2,7 +2,7 @@
 
 set -eu
 
-if [ ${#} != 4 ]
+if [ ${#} -ne 4 ]
 then
   echo "Usage: ${0} <ca-root-dir> <ca-cn> <server-cn> <client-cn>"
   exit 1

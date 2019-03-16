@@ -2,7 +2,7 @@
 
 set -eu
 
-if [ ! ${#} -eq 2 ]
+if [ ${#} -ne 2 ]
 then
   echo "Usage ${0} <url> <quality>"
   exit 1

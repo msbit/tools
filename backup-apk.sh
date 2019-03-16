@@ -4,7 +4,7 @@ set -eu
 
 ADB=${ADB-adb}
 
-if [ ${#} -eq 0 ]
+if [ ${#} -ne 1 ]
 then
   echo "Usage ${0} <destination-dir>"
   exit 1
