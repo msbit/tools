@@ -20,9 +20,9 @@ SERVER_CN=${3}
 CLIENT_CN=${4}
 DEFAULT_C='AU'
 DEFAULT_ST='Victoria'
-DEFAULT_L='Melbourne'
-DEFAULT_O='University of Melbourne'
-DEFAULT_OU='Faculty of Science'
+DEFAULT_L='Ballarat'
+DEFAULT_O='Most Significant Bit Software'
+DEFAULT_OU='Development'
 DEFAULT_SUBJ="/C=${DEFAULT_C}/ST=${DEFAULT_ST}/L=${DEFAULT_L}/O=${DEFAULT_O}/OU=${DEFAULT_OU}"
 
 if [ ! -e "${CA_ROOT}/certificate-authority.key" ]
