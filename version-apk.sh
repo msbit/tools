@@ -8,6 +8,12 @@ then
   exit 1
 fi
 
+if ! which apktool > /dev/null
+then
+  echo "Missing required tool: apktool"
+  exit 1
+fi
+
 SCRIPT_NAME=${0}
 
 while [ ${#} -gt 0 ]
