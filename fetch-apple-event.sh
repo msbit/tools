@@ -28,7 +28,7 @@ curl -s -o "${CHILD_FILE}" "${CHILD_URL}"
 pushd "${CHILD_DIR}"
 
 
-grep "^${QUALITY}_vod_.*ts$" "${CHILD_FILE}" | while read VOD_PART_FILE
+grep "^${QUALITY}_vod_.*ts$" "${CHILD_FILE}" | while read -r VOD_PART_FILE
 do
   echo "file '${CHILD_DIR}/${VOD_PART_FILE}'" >> "${CONCAT_FILE}"
   curl -s -O "${VOD_PART_BASE}${VOD_PART_FILE}"

@@ -21,7 +21,7 @@ DEFAULT_SUBJ="/C=${DEFAULT_C}/ST=${DEFAULT_ST}/L=${DEFAULT_L}/O=${DEFAULT_O}/OU=
 
 if [ ! -e "${CA_ROOT}/certificate-authority.key" ]
 then
-    mkdir -p ${CA_ROOT}
+    mkdir -p "${CA_ROOT}"
     openssl genrsa -out "${CA_ROOT}/certificate-authority.key" 2048
 
     openssl req -new \
