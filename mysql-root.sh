@@ -2,6 +2,12 @@
 
 set -eu
 
+if ! which mysql > /dev/null
+then
+  echo "Missing required tool: mysql"
+  exit 1
+fi
+
 MYSQL_USER=debian-sys-maint
 MYSQL_PASSWORD=$(grep password /etc/mysql/debian.cnf | sort | uniq | awk '{print $3}')
 

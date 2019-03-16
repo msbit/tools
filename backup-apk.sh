@@ -2,11 +2,17 @@
 
 set -eu
 
-ADB=${ADB-adb}
-
 if [ ${#} -ne 1 ]
 then
   echo "Usage ${0} <destination-dir>"
+  exit 1
+fi
+
+ADB=${ADB-adb}
+
+if ! which "${ADB}" > /dev/null
+then
+  echo "Missing required tool: ${ADB}"
   exit 1
 fi
 

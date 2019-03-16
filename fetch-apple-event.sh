@@ -8,6 +8,18 @@ then
   exit 1
 fi
 
+if ! which curl > /dev/null
+then
+  echo "Missing required tool: curl"
+  exit 1
+fi
+
+if ! which ffmpeg > /dev/null
+then
+  echo "Missing required tool: ffmpeg"
+  exit 1
+fi
+
 SOURCE_PATH=$(pwd)
 
 MASTER_URL=${1}

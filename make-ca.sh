@@ -8,6 +8,12 @@ then
   exit 1
 fi 
 
+if ! which openssl > /dev/null
+then
+  echo "Missing required tool: openssl"
+  exit 1
+fi
+
 CA_ROOT=${1}
 CA_CN=${2}
 SERVER_CN=${3}

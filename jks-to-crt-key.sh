@@ -8,6 +8,18 @@ then
   exit 1
 fi
 
+if ! which keytool > /dev/null
+then
+  echo "Missing required tool: keytool"
+  exit 1
+fi
+
+if ! which openssl > /dev/null
+then
+  echo "Missing required tool: openssl"
+  exit 1
+fi
+
 SRCKEYSTORE=${1}
 SRCALIAS=${2}
 
