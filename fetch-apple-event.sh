@@ -8,13 +8,13 @@ then
   exit 1
 fi
 
-if ! which curl > /dev/null
+if ! command -v curl > /dev/null
 then
   echo "Missing required tool: curl"
   exit 1
 fi
 
-if ! which ffmpeg > /dev/null
+if ! command -v ffmpeg > /dev/null
 then
   echo "Missing required tool: ffmpeg"
   exit 1

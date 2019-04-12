@@ -8,7 +8,7 @@ then
   exit 1
 fi
 
-if ! which apktool > /dev/null
+if ! command -v apktool > /dev/null
 then
   echo "Missing required tool: apktool"
   exit 1

@@ -8,7 +8,7 @@ then
   exit 1
 fi 
 
-if ! which openssl > /dev/null
+if ! command -v openssl > /dev/null
 then
   echo "Missing required tool: openssl"
   exit 1

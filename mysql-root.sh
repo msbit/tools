@@ -2,7 +2,7 @@
 
 set -eu
 
-if ! which mysql > /dev/null
+if ! command -v mysql > /dev/null
 then
   echo "Missing required tool: mysql"
   exit 1

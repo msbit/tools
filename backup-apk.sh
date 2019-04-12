@@ -10,7 +10,7 @@ fi
 
 ADB=${ADB-adb}
 
-if ! which "${ADB}" > /dev/null
+if ! command -v "${ADB}" > /dev/null
 then
   echo "Missing required tool: ${ADB}"
   exit 1

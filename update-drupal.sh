@@ -2,7 +2,7 @@
 
 set -eu
 
-if ! which drush > /dev/null
+if ! command -v drush > /dev/null
 then
   echo "Missing required tool: drush" 
   exit 1
