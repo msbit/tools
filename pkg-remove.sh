@@ -22,25 +22,12 @@ LOCATION=$(pkgutil --pkg-info "${1}" | grep '^location' | awk '{print $2}')
 BASE_PATH="${VOLUME}/${LOCATION}"
 
 echo "Removing files"
-pkgutil --files "${1}" | while read -r FILE
+pkgutil --files "${1}" | awk '{print length(), $0}' | sort -rn | while read -r _UNUSED FILE
 do
   FULL_PATH="${BASE_PATH}/${FILE}"
-  if [ -f "${FULL_PATH}" ]
-  then
-    sudo rm "${FULL_PATH}"
-  fi
+  sudo rm -d "${FULL_PATH}" || echo "Skipping ${FULL_PATH}"
 done
 
-echo "Removing directories"
-pkgutil --files "${1}" | while read -r FILE
-do
-  FULL_PATH="${BASE_PATH}/${FILE}"
-  if [ -d "${FULL_PATH}" ]
-  then
-    sudo rm -r "${FULL_PATH}"
-  fi
-done
-
-sudo rm -rf "${BASE_PATH}"
+sudo rm -d "${BASE_PATH}" || echo "Skipping ${BASE_PATH}"
 
 sudo pkgutil --forget "${1}"
