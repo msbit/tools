@@ -4,7 +4,7 @@ A grab bag of Bash scripts that I have used often enough to find semi-useful
 
 ## Backup APK
 
-    backup-apk.sh
+    backup-apk.sh <destination-dir>
 
 Backup all APK files from an attached Android device.
 
@@ -16,19 +16,19 @@ Run Bundle update in a Ruby project, determine the appropriate direct and transi
 
 ## Fetch Apple Event
 
-    fetch-apple-event.sh
+    fetch-apple-event.sh <url> <quality>
 
 Download all TS files for a specified Apple event and concatenate them using FFmpeg.
 
 ## JKS to CRT Key
 
-    jks-to-crt-key.sh
+    jks-to-crt-key.sh <source-key-store> <source-alias>
 
 Extract a specific key from a Java Key Store file and convert into an OpenSSL PEM formatted public/private key pair.
 
 ## Make CA
 
-    make-ca.sh
+    make-ca.sh <ca-root-dir> <ca-cn> <server-cn> <client-cn>
 
 Make a local Certificate Authority using OpenSSL.
 
@@ -40,7 +40,7 @@ Under Debian, Log into MySQL as the root user, using the specific maintainer use
 
 ## Pkg Remove
 
-    pkg-remove.sh
+    pkg-remove.sh <pkg-id>
 
 Under macOS, remove all files associated with a package and then forget the package itself, ostensibly acting as the missing pkgutil remove command.
 
@@ -58,7 +58,7 @@ Open a new shell instance in a temporary scratch directory, and clean up the dir
 
 ## Strip JAR
 
-    strip-jar.sh
+    strip-jar.sh <in-jar-file> <out-jar-file> <class>
 
 Unpack a JAR file and create an updated JAR file with the specified classes/packages removed.
 
@@ -70,6 +70,6 @@ Perform an appropriate sequence of `drush` commands to properly update Drupal.
 
 ## Version APK
 
-    version-apk.sh
+    version-apk.sh <apk-file> [<apk-file> ...]
 
 Print out the package, version and version code of a specified APK file.
