@@ -19,7 +19,7 @@ then
   git checkout "${GIT_CURRENT_BRANCH}"
   git branch -D "${GIT_UPDATES_BRANCH}"
 else
-  while read _ GEM VER
+  while read -r _ GEM VER
   do
     grep --silent "^  gem '${GEM}'" Gemfile && DIRECT+=("${GEM}@${VER}") || TRANSITIVE+=("${GEM}@${VER}")
   done <<< "${MODIFIED_GEM_VERS}"
@@ -31,9 +31,9 @@ else
   then
     echo "Direct dependencies:" >> "${GIT_MESSAGE_FILE}"
     echo >> "${GIT_MESSAGE_FILE}"
-    for GEM_VER in ${DIRECT[@]}
+    for GEM_VER in "${DIRECT[@]}"
     do
-      echo "  * $(echo "${GEM_VER}" | sed -e 's/@/ /g')" >> "${GIT_MESSAGE_FILE}"
+      echo "  * ${GEM_VER//@/ }" >> "${GIT_MESSAGE_FILE}"
     done
     echo >> "${GIT_MESSAGE_FILE}"
   fi
@@ -42,9 +42,9 @@ else
   then
     echo "Transitive dependencies:" >> "${GIT_MESSAGE_FILE}"
     echo >> "${GIT_MESSAGE_FILE}"
-    for GEM_VER in ${TRANSITIVE[@]}
+    for GEM_VER in "${TRANSITIVE[@]}"
     do
-      echo "  * $(echo "${GEM_VER}" | sed -e 's/@/ /g')" >> "${GIT_MESSAGE_FILE}"
+      echo "  * ${GEM_VER//@/ }" >> "${GIT_MESSAGE_FILE}"
     done
   fi
 
