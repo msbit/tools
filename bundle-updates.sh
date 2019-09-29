@@ -1,6 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -eu
+
+if ! command -v bundle > /dev/null
+then
+  echo "Missing required tool: bundle"
+  exit 1
+fi
+
+if ! command -v git > /dev/null
+then
+  echo "Missing required tool: git"
+  exit 1
+fi
 
 GIT_MESSAGE_FILE=$(mktemp)
 GIT_CURRENT_BRANCH=$(git branch --show-current)
