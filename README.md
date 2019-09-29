@@ -44,6 +44,12 @@ Under Debian, Log into MySQL as the root user, using the specific maintainer use
 
 Under macOS, remove all files associated with a package and then forget the package itself, ostensibly acting as the missing pkgutil remove command.
 
+## Push All
+
+    push-all.sh
+
+Iterate over each Git remote and push with the provided arguments.
+
 ## Scratch
 
     scratch.sh
