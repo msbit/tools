@@ -11,13 +11,13 @@ fi
 if ! command -v curl > /dev/null
 then
   echo "Missing required tool: curl"
-  exit 1
+  exit 2
 fi
 
 if ! command -v ffmpeg > /dev/null
 then
   echo "Missing required tool: ffmpeg"
-  exit 1
+  exit 2
 fi
 
 SOURCE_PATH=$(pwd)

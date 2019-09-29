@@ -11,13 +11,13 @@ fi
 if ! command -v unzip > /dev/null
 then
   echo "Missing required tool: unzip"
-  exit 3
+  exit 2
 fi
 
 if ! command -v jar > /dev/null
 then
   echo "Missing required tool: jar"
-  exit 3
+  exit 2
 fi
 
 UNZIP_DIR=$(mktemp -d -t $$.XXXXXXXXXX)

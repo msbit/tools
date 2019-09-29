@@ -11,7 +11,7 @@ fi
 if ! command -v openssl > /dev/null
 then
   echo "Missing required tool: openssl"
-  exit 1
+  exit 2
 fi
 
 CA_ROOT=${1}
