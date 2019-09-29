@@ -46,7 +46,7 @@ Under macOS, remove all files associated with a package and then forget the pack
 
 ## Push All
 
-    push-all.sh
+    push-all.sh <push-arguments>
 
 Iterate over each Git remote and push with the provided arguments.
 
