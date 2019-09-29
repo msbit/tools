@@ -6,7 +6,7 @@ if [ ${#} -ne 4 ]
 then
   echo "Usage: ${0} <ca-root-dir> <ca-cn> <server-cn> <client-cn>"
   exit 1
-fi 
+fi
 
 if ! command -v openssl > /dev/null
 then

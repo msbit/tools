@@ -41,7 +41,7 @@ do
     continue
   fi
   ${ADB} pull "${PKG_FILE}" "${PKG_NAME}"
-  if [[ ! -s "${PKG_NAME}" ]] 
+  if [[ ! -s "${PKG_NAME}" ]]
   then
     echo "Error fetching ${PKG_NAME}"
     continue

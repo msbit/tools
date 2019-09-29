@@ -4,7 +4,7 @@ set -eu
 
 if ! command -v drush > /dev/null
 then
-  echo "Missing required tool: drush" 
+  echo "Missing required tool: drush"
   exit 1
 fi
 

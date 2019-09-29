@@ -39,7 +39,7 @@ keytool -importkeystore \
 	-destkeystore "${DSTKEYSTORE}" \
 	-deststoretype PKCS12 \
 	-deststorepass "${DSTKEYSTOREPASS}" \
-	-destkeypass "${DSTKEYSTOREPASS}" 
+	-destkeypass "${DSTKEYSTOREPASS}"
 
 openssl pkcs12 -in "${DSTKEYSTORE}" \
 	-nocerts \
