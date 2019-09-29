@@ -5,13 +5,13 @@ set -eu
 if ! command -v bundle > /dev/null
 then
   echo "Missing required tool: bundle"
-  exit 1
+  exit 2
 fi
 
 if ! command -v git > /dev/null
 then
   echo "Missing required tool: git"
-  exit 1
+  exit 2
 fi
 
 GIT_MESSAGE_FILE=$(mktemp)

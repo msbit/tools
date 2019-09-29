@@ -11,7 +11,7 @@ fi
 if ! command -v pkgutil > /dev/null
 then
   echo "Missing required tool: pkgutil"
-  exit 1
+  exit 2
 fi
 
 pkgutil --pkg-info "${1}"

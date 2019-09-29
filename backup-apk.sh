@@ -13,7 +13,7 @@ ADB=${ADB-adb}
 if ! command -v "${ADB}" > /dev/null
 then
   echo "Missing required tool: ${ADB}"
-  exit 1
+  exit 2
 fi
 
 TMP_DIR=$(mktemp -d -t backup-apk.XXXXXXXXXX)

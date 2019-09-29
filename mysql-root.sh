@@ -5,7 +5,7 @@ set -eu
 if ! command -v mysql > /dev/null
 then
   echo "Missing required tool: mysql"
-  exit 1
+  exit 2
 fi
 
 MYSQL_USER=debian-sys-maint

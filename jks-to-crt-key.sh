@@ -11,13 +11,13 @@ fi
 if ! command -v keytool > /dev/null
 then
   echo "Missing required tool: keytool"
-  exit 1
+  exit 2
 fi
 
 if ! command -v openssl > /dev/null
 then
   echo "Missing required tool: openssl"
-  exit 1
+  exit 2
 fi
 
 SRCKEYSTORE=${1}

@@ -11,7 +11,7 @@ fi
 if ! command -v apktool > /dev/null
 then
   echo "Missing required tool: apktool"
-  exit 1
+  exit 2
 fi
 
 while [ ${#} -gt 0 ]
