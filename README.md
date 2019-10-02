@@ -14,6 +14,12 @@ Backup all APK files from an attached Android device.
 
 Run Bundle update in a Ruby project, determine the appropriate direct and transitive dependencies, and add a Git commit with a corresponding message.
 
+## Curl Benchmark
+
+    curl-benchmark.sh <curl-arguments>
+
+Execute a Curl request a number of times, reporting the total time spent on the request, for a loose benchmark of the request.
+
 ## Fetch Apple Event
 
     fetch-apple-event.sh <url> <quality>
