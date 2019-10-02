@@ -24,7 +24,7 @@ git checkout -b "${GIT_UPDATES_BRANCH}"
 
 bundle update
 
-MODIFIED_GEM_VERS=$(git diff Gemfile.lock | grep '^+    ' || echo -n)
+MODIFIED_GEM_VERS=$(git diff Gemfile.lock | grep '^+    [^ ]' || echo -n)
 
 if [ "${MODIFIED_GEM_VERS}" == '' ]
 then
