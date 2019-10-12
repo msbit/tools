@@ -15,7 +15,7 @@ then
 fi
 
 GIT_MESSAGE_FILE=$(mktemp)
-GIT_CURRENT_BRANCH=$(git branch --show-current)
+GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 GIT_UPDATES_BRANCH=bundle-updates-$(date +%s)
 DIRECT=()
 TRANSITIVE=()
