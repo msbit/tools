@@ -26,6 +26,12 @@ Execute a Curl request a number of times, reporting the total time spent on the 
 
 Download all TS files for a specified Apple event and concatenate them using FFmpeg.
 
+## Hash Files
+
+    hash-files.sh <file> [<file> ...]
+
+Hash provided files and rename to that hash, preserving file extension.
+
 ## JKS to CRT Key
 
     jks-to-crt-key.sh <source-key-store> <source-alias>
