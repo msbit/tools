@@ -2,23 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -ne 2 ]
 then
   echo "Usage ${0} <url> <quality>"
   exit 1
 fi
 
-if ! command -v curl > /dev/null
-then
-  echo "Missing required tool: curl"
-  exit 2
-fi
-
-if ! command -v ffmpeg > /dev/null
-then
-  echo "Missing required tool: ffmpeg"
-  exit 2
-fi
+require_tools curl ffmpeg
 
 SOURCE_PATH=$(pwd)
 

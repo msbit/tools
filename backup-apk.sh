@@ -2,6 +2,9 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -ne 1 ]
 then
   echo "Usage ${0} <destination-dir>"
@@ -10,11 +13,7 @@ fi
 
 ADB=${ADB-adb}
 
-if ! command -v "${ADB}" > /dev/null
-then
-  echo "Missing required tool: ${ADB}"
-  exit 2
-fi
+require_tools "${ADB}"
 
 TMP_DIR=$(mktemp -d -t backup-apk.XXXXXXXXXX)
 if [[ "${1}" = /* || "${1}" = ~* ]]

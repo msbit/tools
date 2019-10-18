@@ -2,17 +2,10 @@
 
 set -eu
 
-if ! command -v bundle > /dev/null
-then
-  echo "Missing required tool: bundle"
-  exit 2
-fi
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
 
-if ! command -v git > /dev/null
-then
-  echo "Missing required tool: git"
-  exit 2
-fi
+require_tools bundle git
 
 GIT_MESSAGE_FILE=$(mktemp)
 GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)

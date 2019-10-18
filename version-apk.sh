@@ -2,17 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -lt 1 ]
 then
   echo "Usage ${0} <apk-file> [<apk-file> ...]"
   exit 1
 fi
 
-if ! command -v apktool > /dev/null
-then
-  echo "Missing required tool: apktool"
-  exit 2
-fi
+require_tools apktool
 
 while [ ${#} -gt 0 ]
 do

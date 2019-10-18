@@ -2,11 +2,10 @@
 
 set -eu
 
-if ! command -v drush > /dev/null
-then
-  echo "Missing required tool: drush"
-  exit 2
-fi
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
+require_tools drush
 
 drush ard
 drush up drupal

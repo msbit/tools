@@ -2,17 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -ne 4 ]
 then
   echo "Usage: ${0} <ca-root-dir> <ca-cn> <server-cn> <client-cn>"
   exit 1
 fi
 
-if ! command -v openssl > /dev/null
-then
-  echo "Missing required tool: openssl"
-  exit 2
-fi
+require_tools openssl
 
 CA_ROOT=${1}
 CA_CN=${2}
