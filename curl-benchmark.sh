@@ -2,17 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -eq 0 ]
 then
   echo "Usage ${0} <curl-arguments>"
   exit 1
 fi
 
-if ! command -v curl > /dev/null
-then
-  echo "Missing required tool: curl"
-  exit 2
-fi
+require_tools curl
 
 for _ in $(seq 1 5)
 do

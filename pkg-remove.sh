@@ -2,17 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -ne 1 ]
 then
   echo "Usage ${0} <pkg-id>"
   exit 1
 fi
 
-if ! command -v pkgutil > /dev/null
-then
-  echo "Missing required tool: pkgutil"
-  exit 2
-fi
+require_tools pkgutil
 
 pkgutil --pkg-info "${1}"
 

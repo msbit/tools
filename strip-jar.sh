@@ -2,23 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -ne 3 ]
 then
   echo "Usage ${0} <in-jar-file> <out-jar-file> <class>"
   exit 1
 fi
 
-if ! command -v jar > /dev/null
-then
-  echo "Missing required tool: jar"
-  exit 2
-fi
-
-if ! command -v unzip > /dev/null
-then
-  echo "Missing required tool: unzip"
-  exit 2
-fi
+require_tools jar unzip
 
 INPUT_JAR_FILE=${1}
 OUTPUT_JAR_FILE=${2}

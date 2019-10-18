@@ -2,23 +2,16 @@
 
 set -eu
 
+# shellcheck source=common.sh
+source "$(dirname "${0}")/common.sh"
+
 if [ ${#} -lt 1 ]
 then
   echo "Usage ${0} <file> [<file> ...]"
   exit 1
 fi
 
-if ! command -v md5sum > /dev/null
-then
-  echo "Missing required tool: md5sum"
-  exit 2
-fi
-
-if ! command -v stat > /dev/null
-then
-  echo "Missing required tool: stat"
-  exit 2
-fi
+require_tools md5sum stat
 
 while (( "${#}" ))
 do
