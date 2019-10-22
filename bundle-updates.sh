@@ -13,6 +13,13 @@ GIT_UPDATES_BRANCH=bundle-updates-$(date +%s)
 DIRECT=()
 TRANSITIVE=()
 
+remove_updates_branch() {
+  git checkout "${GIT_CURRENT_BRANCH}"
+  git branch -D "${GIT_UPDATES_BRANCH}"
+}
+
+trap 'remove_updates_branch' ERR
+
 git checkout -b "${GIT_UPDATES_BRANCH}"
 
 bundle update
@@ -21,8 +28,7 @@ MODIFIED_GEM_VERS=$(git diff Gemfile.lock | grep '^+    [^ ]' || echo -n)
 
 if [ "${MODIFIED_GEM_VERS}" == '' ]
 then
-  git checkout "${GIT_CURRENT_BRANCH}"
-  git branch -D "${GIT_UPDATES_BRANCH}"
+  remove_updates_branch
 else
   while read -r _ GEM VER
   do
