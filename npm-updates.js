@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
 const { appendFileSync, readFileSync, unlinkSync } = require('fs');
 
 function diff (before, after, output) {
@@ -77,9 +77,9 @@ function writeDependencies (file, message, dependencies, prefix = ' ') {
 
 const before = getDependencies();
 
-execSync('rm -rf node_modules package-lock.json', { stdio: 'inherit' });
+spawnSync('rm', ['-rf', 'node_modules', 'package-lock.json'], { stdio: 'inherit' });
 
-execSync('npm install', { stdio: 'inherit' });
+spawnSync('npm', ['install'], { stdio: 'inherit' });
 
 const after = getDependencies();
 
@@ -101,8 +101,8 @@ diff(before.direct, after.direct, direct);
 diff(before.transitive, after.transitive, transitive);
 
 if (exists(direct.total) || exists(transitive.total)) {
-  execSync(`git checkout -b npm-updates-${Date.now()}`, { stdio: 'inherit' });
-  execSync('git add package-lock.json', { stdio: 'inherit' });
+  spawnSync('git', ['checkout', '-b', `npm-updates-${Date.now()}`], { stdio: 'inherit' });
+  spawnSync('git', ['add', 'package-lock.json'], { stdio: 'inherit' });
 
   const commitMessageFile = mktemp();
   console.log(commitMessageFile);
@@ -125,6 +125,6 @@ if (exists(direct.total) || exists(transitive.total)) {
     writeDependencies(commitMessageFile, 'Modified', transitive.modified);
   }
 
-  execSync(`git commit --file ${commitMessageFile}`, { stdio: 'inherit' });
+  spawnSync('git', ['commit', '--file', commitMessageFile], { stdio: 'inherit' });
   unlinkSync(commitMessageFile);
 }
