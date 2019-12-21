@@ -4,23 +4,23 @@ const { spawnSync } = require('child_process');
 const { appendFileSync, readFileSync, unlinkSync } = require('fs');
 
 function diff (before, after, output) {
-  for (const key in before) {
+  for (const [key, value] of Object.entries(before)) {
     if (!(key in after)) {
-      output.removed[key] = before[key];
-      output.total[key] = before[key];
+      output.removed[key] = value;
+      output.total[key] = value;
       continue;
     }
 
-    if (key in after && before[key] !== after[key]) {
+    if (key in after && value !== after[key]) {
       output.modified[key] = after[key];
       output.total[key] = after[key];
     }
     delete after[key];
   }
 
-  for (const key in after) {
-    output.added[key] = after[key];
-    output.total[key] = after[key];
+  for (const [key, value] of Object.entries(after)) {
+    output.added[key] = value;
+    output.total[key] = value;
   }
 }
 
