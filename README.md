@@ -50,6 +50,12 @@ Make a local Certificate Authority using OpenSSL.
 
 Under Debian, Log into MySQL as the root user, using the specific maintainer user created at package install time.
 
+## NPM Updates
+
+    npm-updates.js
+
+Run NPM install in a NodeJS project after removing the existing lockfile, determine the appropriate direct and transitive dependencies, and add a Git commit with a corresponding message.
+
 ## Pkg Remove
 
     pkg-remove.sh <pkg-id>
