@@ -14,6 +14,12 @@ Backup all APK files from an attached Android device.
 
 Run Bundle update in a Ruby project, determine the appropriate direct and transitive dependencies, and add a Git commit with a corresponding message.
 
+## Composer Updates
+
+    composer-updates.sh
+
+Run Composer update in a PHP project, determine the appropriate direct and transitive dependencies, and add a Git commit with a corresponding message.
+
 ## Curl Benchmark
 
     curl-benchmark.sh <curl-arguments>
