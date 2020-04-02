@@ -26,7 +26,7 @@ bundle update
 
 MODIFIED_GEM_VERS=$(git diff Gemfile.lock | grep '^+    [^ ]' || echo -n)
 
-if [ "${MODIFIED_GEM_VERS}" == '' ]
+if [ "${MODIFIED_GEM_VERS}" = '' ]
 then
   remove_updates_branch
 else
