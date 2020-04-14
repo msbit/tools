@@ -91,3 +91,15 @@ Perform an appropriate sequence of `drush` commands to properly update Drupal.
     version-apk.sh <apk-file> [<apk-file> ...]
 
 Print out the package, version and version code of a specified APK file.
+
+## Zopfil Files
+
+    zopfli-files.sh <file.png> [<file.png> ...]
+
+Optimise PNG files using `zopflipng`, updating them in place.
+
+## Zopfil Files (Concurrent)
+
+    zopfli-files-concurrent.sh <file.png> [<file.png> ...]
+
+As per `Zopfli Files`, running as many jobs as there are logical cores on the machine.
