@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux
+set -eu
 
 # shellcheck source=common.sh
 source "$(dirname "${0}")/common.sh"
