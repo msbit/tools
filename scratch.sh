@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -eu
+set -o errexit
+set -o nounset
 
 WORKING_DIR=$(mktemp -d -t scratch.XXXXXXXXXX)
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -eu
+set -o errexit
+set -o nounset
 
 # shellcheck source=common.sh
 source "$(dirname "${0}")/common.sh"
