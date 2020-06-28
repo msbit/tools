@@ -1,6 +1,6 @@
 # Tools
 
-A grab bag of Bash scripts that I have used often enough to find semi-useful
+A grab bag of scripts that I have used often enough to find semi-useful
 
 ## Backup APK
 
@@ -48,7 +48,7 @@ Make a local Certificate Authority using OpenSSL.
 
     mysql-root.sh
 
-Under Debian, Log into MySQL as the root user, using the specific maintainer user created at package install time.
+Under Debian, log into MySQL as the root user, using the specific maintainer user created at package install time.
 
 ## NPM Updates
 
@@ -92,13 +92,13 @@ Perform an appropriate sequence of `drush` commands to properly update Drupal.
 
 Print out the package, version and version code of a specified APK file.
 
-## Zopfil Files
+## Zopfli Files
 
     zopfli-files.sh <file.png> [<file.png> ...]
 
 Optimise PNG files using `zopflipng`, updating them in place.
 
-## Zopfil Files (Concurrent)
+## Zopfli Files (Concurrent)
 
     zopfli-files-concurrent.sh <file.png> [<file.png> ...]
 
