@@ -1,9 +1,20 @@
 #!/usr/bin/env node
 
-const { spawnSync } = require('child_process');
-const { appendFileSync, readFileSync, unlinkSync } = require('fs');
+const { spawnSync: spawn } = require('child_process');
+const {
+  appendFileSync: append,
+  readFileSync: read,
+  unlinkSync: unlink
+} = require('fs');
 
-function diff (before, after, output) {
+const diff = (before, after) => {
+  const output = {
+    added: {},
+    modified: {},
+    removed: {},
+    total: {}
+  };
+
   for (const [key, value] of Object.entries(before)) {
     if (!(key in after)) {
       output.removed[key] = value;
@@ -15,6 +26,7 @@ function diff (before, after, output) {
       output.modified[key] = after[key];
       output.total[key] = after[key];
     }
+
     delete after[key];
   }
 
@@ -22,40 +34,33 @@ function diff (before, after, output) {
     output.added[key] = value;
     output.total[key] = value;
   }
-}
 
-function exists (obj) {
-  return Object.entries(obj).length > 0;
-}
+  return output;
+};
 
-function getDependencies () {
-  const pkg = JSON.parse(readFileSync('package.json'));
-  const pkgLock = JSON.parse(readFileSync('package-lock.json'));
+const exists = (obj) => Object.entries(obj).length > 0;
 
-  const direct = Object.keys({
-    ...pkg.dependencies,
-    ...pkg.devDependencies
-  }).sort();
+const getDependencies = () => {
+  const { dependencies: deps, devDependencies: devDeps } = JSON.parse(read('package.json'));
+  const { dependencies: lockDeps } = JSON.parse(read('package-lock.json'));
 
-  const transitive = Object.keys(pkgLock.dependencies).filter(d => !direct.includes(d));
+  const direct = Object.keys({ ...deps, ...devDeps }).sort();
 
   const output = {
     direct: {},
     transitive: {}
   };
 
-  direct.forEach((d) => {
-    output.direct[d] = pkgLock.dependencies[d].version;
-  });
+  direct.forEach((d) => { output.direct[d] = lockDeps[d].version; });
 
-  transitive.forEach((d) => {
-    output.transitive[d] = pkgLock.dependencies[d].version;
-  });
+  Object.keys(lockDeps)
+    .filter(d => !direct.includes(d))
+    .forEach((d) => { output.transitive[d] = lockDeps[d].version; });
 
   return output;
-}
+};
 
-function mktemp () {
+const mktemp = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let tmpFile = 'tmp.';
   for (let i = 0; i < 8; i++) {
@@ -63,68 +68,55 @@ function mktemp () {
     tmpFile += chars[index];
   }
   return `${process.env.TMPDIR}${tmpFile}`;
-}
+};
 
-function writeDependencies (file, message, dependencies, prefix = ' ') {
-  if (exists(dependencies)) {
-    appendFileSync(file, `${prefix}${message}\n\n`);
-    for (const [key, value] of Object.entries(dependencies)) {
-      appendFileSync(file, `${prefix} * ${key}: ${value}\n`);
-    }
-    appendFileSync(file, '\n');
+const writeDependencySet = (file, { added, removed, modified }) => {
+  writeDependencies(file, 'Added', added);
+  writeDependencies(file, 'Removed', removed);
+  writeDependencies(file, 'Modified', modified);
+};
+
+const writeDependencies = (file, message, dependencies, prefix = ' ') => {
+  if (!exists(dependencies)) { return; }
+
+  append(file, `${prefix}${message}\n\n`);
+  for (const [key, value] of Object.entries(dependencies)) {
+    append(file, `${prefix} * ${key}: ${value}\n`);
   }
-}
+  append(file, '\n');
+};
 
 const before = getDependencies();
 
-spawnSync('rm', ['-rf', 'node_modules', 'package-lock.json'], { stdio: 'inherit' });
+spawn('rm', ['-rf', 'node_modules', 'package-lock.json'], { stdio: 'inherit' });
 
-spawnSync('npm', ['install'], { stdio: 'inherit' });
+spawn('npm', ['install'], { stdio: 'inherit' });
 
 const after = getDependencies();
 
-const direct = {
-  added: {},
-  modified: {},
-  removed: {},
-  total: {}
-};
-
-const transitive = {
-  added: {},
-  modified: {},
-  removed: {},
-  total: {}
-};
-
-diff(before.direct, after.direct, direct);
-diff(before.transitive, after.transitive, transitive);
+const direct = diff(before.direct, after.direct);
+const transitive = diff(before.transitive, after.transitive);
 
 if (exists(direct.total) || exists(transitive.total)) {
-  spawnSync('git', ['checkout', '-b', `npm-updates-${Date.now()}`], { stdio: 'inherit' });
-  spawnSync('git', ['add', 'package-lock.json'], { stdio: 'inherit' });
+  spawn('git', ['checkout', '-b', `npm-updates-${Date.now()}`], { stdio: 'inherit' });
+  spawn('git', ['add', 'package-lock.json'], { stdio: 'inherit' });
 
-  const commitMessageFile = mktemp();
-  console.log(commitMessageFile);
+  const file = mktemp();
 
-  appendFileSync(commitMessageFile, 'Dependency updates\n\n');
+  append(file, 'Dependency updates\n\n');
 
   if (exists(direct.total)) {
-    appendFileSync(commitMessageFile, 'Direct dependencies\n\n');
+    append(file, 'Direct dependencies\n\n');
 
-    writeDependencies(commitMessageFile, 'Added', direct.added);
-    writeDependencies(commitMessageFile, 'Removed', direct.removed);
-    writeDependencies(commitMessageFile, 'Modified', direct.modified);
+    writeDependencySet(file, direct);
   }
 
   if (exists(transitive.total)) {
-    appendFileSync(commitMessageFile, 'Transitive dependencies\n\n');
+    append(file, 'Transitive dependencies\n\n');
 
-    writeDependencies(commitMessageFile, 'Added', transitive.added);
-    writeDependencies(commitMessageFile, 'Removed', transitive.removed);
-    writeDependencies(commitMessageFile, 'Modified', transitive.modified);
+    writeDependencySet(file, transitive);
   }
 
-  spawnSync('git', ['commit', '--file', commitMessageFile], { stdio: 'inherit' });
-  unlinkSync(commitMessageFile);
+  spawn('git', ['commit', '--file', file], { stdio: 'inherit' });
+  unlink(file);
 }
