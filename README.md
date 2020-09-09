@@ -50,6 +50,12 @@ Make a local Certificate Authority using OpenSSL.
 
 Under Debian, log into MySQL as the root user, using the specific maintainer user created at package install time.
 
+## NG Updates
+
+    ng-updates.js
+
+Run `ng update` in a NodeJS project with all currently configured package and version specifications, determine the appropriate direct and transitive dependencies, and add a Git commit with a corresponding message.
+
 ## NPM Updates
 
     npm-updates.js
