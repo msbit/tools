@@ -3,7 +3,7 @@
 const { spawnSync } = require('child_process');
 const { appendFileSync, unlinkSync } = require('fs');
 
-const { determineDependencyChanges, exists, mktemp, writeDependencySet } = require('./npm-common.js');
+const { determineDependencyChanges, exists, mktemp, writeDependencySet } = require('./node-common.js');
 
 const action = () => {
   spawnSync('rm', ['-rf', 'node_modules', 'package-lock.json'], {
