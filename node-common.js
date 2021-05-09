@@ -31,11 +31,20 @@ const diff = (before, after) => {
   return output;
 };
 
+const pkgToDep = pkg => pkg.split('node_modules/').pop();
+
 const exists = obj => Object.entries(obj).length > 0;
+
+const unique = arr => {
+  const set = new Set(arr);
+  const result = [...set];
+  result.sort();
+  return result;
+};
 
 const getDependencies = () => {
   const { dependencies: deps, devDependencies: devDeps } = JSON.parse(readFileSync('package.json'));
-  const { dependencies: lockDeps } = JSON.parse(readFileSync('package-lock.json'));
+  const { dependencies: lockDeps, packages } = JSON.parse(readFileSync('package-lock.json'));
 
   const direct = Object.keys({ ...deps, ...devDeps }).sort();
 
@@ -46,9 +55,15 @@ const getDependencies = () => {
 
   direct.forEach(d => { output.direct[d] = lockDeps[d].version; });
 
-  Object.keys(lockDeps)
-    .filter(d => !direct.includes(d))
-    .forEach(d => { output.transitive[d] = lockDeps[d].version; });
+  Object.keys(packages)
+    .filter(pkg => pkg !== '')
+    .map(pkgToDep)
+    .filter(dep => !direct.includes(dep))
+    .forEach(dep => {
+      const matches = Object.entries(packages).filter(([k, _]) => pkgToDep(k) === dep);
+      const versions = matches.map(([_, x]) => x.version);
+      output.transitive[dep] = unique(versions).join(', ');
+    });
 
   return output;
 };
