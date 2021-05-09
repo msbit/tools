@@ -31,7 +31,7 @@ const diff = (before, after) => {
   return output;
 };
 
-const exists = (obj) => Object.entries(obj).length > 0;
+const exists = obj => Object.entries(obj).length > 0;
 
 const getDependencies = () => {
   const { dependencies: deps, devDependencies: devDeps } = JSON.parse(readFileSync('package.json'));
@@ -44,11 +44,11 @@ const getDependencies = () => {
     transitive: {}
   };
 
-  direct.forEach((d) => { output.direct[d] = lockDeps[d].version; });
+  direct.forEach(d => { output.direct[d] = lockDeps[d].version; });
 
   Object.keys(lockDeps)
     .filter(d => !direct.includes(d))
-    .forEach((d) => { output.transitive[d] = lockDeps[d].version; });
+    .forEach(d => { output.transitive[d] = lockDeps[d].version; });
 
   return output;
 };
