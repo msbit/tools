@@ -2,6 +2,11 @@
 
 A grab bag of scripts that I have used often enough to find semi-useful
 
+## (Dis)Assemble APK
+
+    assemble-apk.sh <source-dir> <apk-file>
+    disassemble-apk.sh <apk-file> <dest-dir>
+
 ## Backup APK
 
     backup-apk.sh <destination-dir>
