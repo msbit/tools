@@ -13,6 +13,12 @@ A grab bag of scripts that I have used often enough to find semi-useful
 
 Backup all APK files from an attached Android device.
 
+## Build RSA Key
+
+    build-rsa-key.sh <bae64-modulus> <base64-exponent>
+
+Build an RSA key from the provided Base64 encoded `modulus` and `exponent`.
+
 ## Bundle Updates
 
     bundle-updates.sh
